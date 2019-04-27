@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include <conio.h>
+#include <string.h>
+#include <curses.h>
+
 
 #define TAM 3
 
@@ -26,6 +28,19 @@ typedef struct
 
 } eEmpleado;
 
+typedef struct{
+    int id;
+    char descripcion[20];
+}eComida;
+
+typedef struct{
+    int id;
+    int idEmpleado;
+    int idComidaM;
+    eFecha fecha;
+}eAlmuerzo;
+
+
 int menu();
 void inicializarEmpleados(eEmpleado vec[], int tam);
 int buscarLibre(eEmpleado vec[], int tam);
@@ -37,14 +52,20 @@ void bajaEmpleado(eEmpleado vec[], int tam);
 void ModificacionEmpleado(eEmpleado vec[], int tam);
 void filtrarPorAnio(eEmpleado vec[], int tam, int anio);
 void inicializarEmpleadosTotal(eEmpleado vec[], int tam);
+void inicializarComida(eComida com[], int tam);
+void inicializarAlmuerzo(eAlmuerzo alm[], int tam);
 
 int main()
 {
     char seguir = 's';
     char confirma;
     eEmpleado lista[TAM];
+    eComida comi[TAM];
+    eAlmuerzo alm[TAM];
     inicializarEmpleados(lista, TAM); // llamada
     inicializarEmpleadosTotal(lista, TAM);
+    inicializarComida(comi, TAM);
+    inicializarAlmuerzo(alm, TAM);
     int anio;
     do
     {
@@ -374,6 +395,27 @@ void ModificacionEmpleado(eEmpleado vec[], int tam)
 
 
 
+}
+
+void inicializarComida(eComida com[], int tam){
+
+    eComida comidas[]={{1, "Milanesa"},{2, "Fideos"},{3, "Carne"}};
+
+    for(int i=0; i<tam;i++){
+        com[i] = comidas[i];
+    }
 
 }
 
+
+void inicializarAlmuerzo(eAlmuerzo alm[], int tam){
+
+    eAlmuerzo almuerzo[]={{1, 1234, 1, {12,04,2019}},
+                        {2, 4321, 2, {13,04,2019}},
+                        {3, 5678, 3, {14,04,2019}}};
+
+    for(int i=0; i<tam;i++){
+        alm[i] = almuerzo[i];
+    }
+
+}
